@@ -5,7 +5,7 @@ import { pool } from '../config/db.js';
 // La tabla reclamos_luz conserva sus nombres originales; aquí se exponen con los nombres del contrato de la API
 const columnas = (a = '') => `
   ${a}id, ${a}id_usuario AS usuario_id, ${a}codigo_seguimiento, ${a}dni, ${a}nombre_cliente, ${a}numero_suministro,
-  ${a}motivo, ${a}direccion, ${a}mes_reclamo, ${a}monto_reclamamo AS monto_reclamado, ${a}comentario, ${a}respuesta,
+  ${a}motivo, ${a}direccion, ${a}mes_reclamo, ${a}monto_reclamo AS monto_reclamado, ${a}comentario, ${a}respuesta,
   ${a}tipo_medidor, ${a}km_fuera_zona, ${a}monto_calculado, ${a}estado, ${a}estado_pago, ${a}canal_pago,
   ${a}canal_registro, ${a}atendido_por, ${a}fecha_registro AS created_at`;
 
@@ -18,7 +18,7 @@ export async function crear(d, db = pool) {
   const { rows } = await db.query(
     `INSERT INTO reclamos_luz
        (id_usuario, codigo_seguimiento, dni, nombre_cliente, numero_suministro, motivo, direccion,
-        mes_reclamo, monto_reclamamo, comentario, tipo_medidor, km_fuera_zona, monto_calculado,
+        mes_reclamo, monto_reclamo, comentario, tipo_medidor, km_fuera_zona, monto_calculado,
         estado, estado_pago, canal_registro)
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,'registrado',$14,$15)
      RETURNING id, codigo_seguimiento AS codigo, monto_calculado, estado_pago`,
